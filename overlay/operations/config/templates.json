@@ -1,0 +1,305 @@
+{
+  "kibana": {
+    "template": ".kibana",
+    "settings": {
+      "number_of_replicas": 0,
+      "number_of_shards": 1
+    }
+  },
+  "raw": {
+    "template": "raw-*",
+    "settings": {
+      "number_of_replicas": 0,
+      "number_of_shards": 1
+    }
+  },
+  "connections": {
+     "template": "connections-*",
+     "settings": {
+       "number_of_replicas": 0,
+       "number_of_shards": 2
+     },
+     "mappings": {
+       "syslog": {
+         "properties": {
+           "@timestamp": {
+             "type": "date"
+           },
+           "Domain": {
+             "type": "keyword",
+             "ignore_above": 256
+           },
+           "Mode": {
+             "type": "keyword",
+             "ignore_above": 256
+           },
+           "Client IP": {
+             "type": "keyword",
+             "ignore_above": 256
+           },
+           "Username": {
+             "type": "keyword",
+             "ignore_above": 256
+           },
+           "URL": {
+              "type": "text"
+           },
+           "Local Browser": {
+             "type": "keyword",
+             "ignore_above": 256
+           }
+         }
+       }
+     }
+  },
+  "systemusage": {
+    "template": "systemusage-*",
+    "settings": {
+      "number_of_replicas": 0,
+      "number_of_shards": 2
+    },
+    "mappings": {
+      "syslog": {
+        "properties": {
+          "@timestamp": {
+            "type": "date"
+          },
+          "log-json": {
+            "properties": {
+              "free_browsers": {
+                "type": "long"
+              },
+              "usedbrowsers": {
+                "type": "long"
+              },
+              "sessions": {
+                "type": "long"
+              },
+              "users": {
+                "type": "long"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "file-transfer": {
+    "template": "file-transfer-*",
+    "mappings": {
+      "transfer": {
+        "properties": {
+          "@timestamp": {
+            "type": "date"
+          },
+          "userName": {
+            "type": "keyword",
+            "ignore_above": 96
+          },
+          "clientIp": {
+            "type": "ip"
+          },
+          "durationSec": {
+            "type": "long"
+          },
+          "errorMessage": {
+            "type": "text",
+            "fielddata": true
+          },
+          "failed": {
+            "type": "boolean"
+          },
+          "fileDomain": {
+            "type": "keyword",
+            "ignore_above": 1024
+          },
+          "fileExtension": {
+            "type": "keyword",
+            "ignore_above": 256
+          },
+          "fileName": {
+            "type": "keyword",
+            "ignore_above": 1024
+          },
+          "filePolicy": {
+            "type": "keyword",
+            "ignore_above": 256
+          },
+          "fileAction": {
+            "type": "keyword",
+            "ignore_above": 96
+          },
+          "fileSize": {
+            "type": "keyword",
+            "ignore_above": 256
+          },
+          "fileUrl": {
+            "type": "text",
+            "fielddata": true
+          },
+          "finalStatus": {
+            "type": "keyword",
+            "ignore_above": 128
+          },
+          "siteDomain": {
+            "type": "keyword",
+            "ignore_above": 2048
+          },
+          "siteUrl": {
+            "type": "text",
+            "fielddata": true
+          }
+        }
+      }
+    },
+    "settings": {
+      "number_of_shards": "3",
+      "number_of_replicas": "0"
+    }
+  },
+  "file-sanitization": {
+    "template": "file-sanitization-*",
+    "mappings": {
+      "sanitization": {
+        "properties": {
+          "@timestamp": {
+            "type": "date"
+          },
+          "userName": {
+            "type": "keyword",
+            "ignore_above": 96
+          },
+          "clientIp": {
+            "type": "ip"
+          },
+          "durationSec": {
+            "type": "long"
+          },
+          "errorMessage": {
+            "type": "text",
+            "fielddata": true
+          },
+          "fileDomain": {
+            "type": "keyword",
+            "ignore_above": 2048
+          },
+          "fileExtension": {
+            "type": "keyword",
+            "ignore_above": 16
+          },
+          "fileName": {
+            "type": "keyword",
+            "ignore_above": 2048
+          },
+          "filePolicy": {
+            "type": "keyword",
+            "ignore_above": 128
+          },                 
+          "fileSize": {
+            "type": "keyword",
+            "ignore_above": 128
+          },
+          "fileUrl": {
+            "type": "text",
+            "fielddata": true
+          },
+          "siteDomain": {
+            "type": "keyword",
+            "ignore_above": 1024
+          },
+          "siteUrl": {
+            "type": "text",
+            "fielddata": true
+          },
+          "finalStatus": {
+            "type": "keyword",
+            "ignore_above": 128
+          },
+          "cdrStatus": {
+            "type": "keyword",
+            "ignore_above": 128
+          }
+        }
+      }
+    },
+    "settings": {
+      "number_of_shards": "3",
+      "number_of_replicas": "0"
+    }
+  },
+  "file-download": {
+     "template": "file-download-*",
+      "settings": {
+        "number_of_shards": "3",
+        "number_of_replicas": "0"
+      },
+      "mappings": {
+         "download": {
+            "properties": {
+              "@timestamp": {
+                "type": "date"
+              },
+              "userName": {
+                "type": "keyword",
+                "ignore_above": 96
+              },
+              "fileName": {
+                "type": "keyword",
+                "ignore_above": 1024
+              },
+              "fileExtension": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "fileSize": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "filePolicy": {
+                "type": "keyword",
+                "ignore_above": 256
+              },             
+              "finalStatus": {
+                "type": "keyword",
+                "ignore_above": 128
+              },
+              "errorMessage": {
+                "type": "text",
+                "fielddata": true
+              },
+              "errorStep": {
+                "type": "text",
+                "fielddata": true
+              },
+              "durationSec": {
+                "type": "long"
+              },
+              "siteDomain": {
+                "type": "keyword",
+                "ignore_above": 1024
+              },
+              "siteUrl": {
+                "type": "text",
+                "fielddata": true
+              },
+              "fileUrl": {
+                "type": "text",
+                "fielddata": true
+              },
+              "fileDomain": {
+                "type": "keyword",
+                "ignore_above": 2048
+              },
+              "clientIp": {
+                "type": "ip"
+              },
+              "internalTaskId": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+
+            }
+         }
+      }
+  }
+}

@@ -1,0 +1,47 @@
+input {
+  udp {
+    port  => 5014
+    codec => json
+  }
+  tcp {
+    port  => 5025
+    codec => json
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{TIMESTAMP_ISO8601:timestamp}\s(?<log>.*)"}
+  }
+
+  json {
+    source => "log"
+    tag_on_failure => "nonjsonlog"
+    target => "log-json"
+    remove_field => [ "log" ]
+  }
+
+  if !("_grokparsefailure" in [tags]) {
+    mutate {
+      remove_field => [ "message" ]
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => [ localhost ]
+    index => "raw-%{+YYYY.MM.dd}"
+    manage_template => false
+  }
+
+  if "${SYSLOG_EXTERNAL_HOST}" != "" {
+    syslog {
+      host => "${SYSLOG_EXTERNAL_HOST}"
+      port => "${SYSLOG_EXTERNAL_PORT}"
+      appname => "ericomshield"
+      message => "%{log} %{log-json}"
+    }
+  }
+
+}

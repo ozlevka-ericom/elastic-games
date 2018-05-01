@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export SYSLOG_EXTERNAL_HOST="$SYSLOG_EXTERNAL_HOST"
+
+if [ -z "$SYSLOG_EXTERNAL_PORT" ]; then
+   export SYSLOG_EXTERNAL_PORT="514"
+else
+   export SYSLOG_EXTERNAL_PORT="$SYSLOG_EXTERNAL_PORT"
+fi
+
+if [ -z "$LOGSTASH_LOG_LEVEL" ]; then
+   export LOGSTASH_LOG_LEVEL="fatal"
+fi
+
+/opt/$LOGSTASH_NAME-$LOGSTASH_VERSION/bin/logstash --log.level $LOGSTASH_LOG_LEVEL -f /etc/$LOGSTASH_NAME/$LOGSTASH_NAME.json

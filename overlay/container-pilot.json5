@@ -1,0 +1,63 @@
+{
+    "consul": "{{ .CONSUL_ADDRESS | default "consul:8500" }}",
+    "jobs": [
+      {
+        "name": "elasticsearch",
+        "exec": "/scripts/elasticsearch.sh",
+        "port": 9200,
+        "restarts": "unlimited",
+        "health": {
+            "exec": "curl -o /dev/null --fail -s http://localhost:9200/_cluster/health",
+            "interval": 30,
+            "ttl": 35
+        },
+        "consul": {
+           "deregisterCriticalServiceAfter": "1m"
+        }
+      },
+      {
+         "name": "kibana",
+         "exec": "/opt/kibana/bin/kibana",
+         "port": 5601,
+         "restarts": "unlimited",
+         "health": {
+           "exec": "curl -o /dev/null --fail -s http://localhost:5601/",
+           "interval": 10,
+           ttl: 20
+         },
+         "when": {
+            "source": "init-indexes",
+            "once": "exitSuccess"
+         },
+         consul: {
+           deregisterCriticalServiceAfter: "1m"
+         }
+      },
+      {
+        "name": "logstash",
+        "exec": "/scripts/logstash.sh",
+        "port": 9600,
+        restarts: "unlimited",
+        "health": {
+           exec: "curl -o /dev/null --fail -s http://localhost:9600/",
+           interval: 10,
+           ttl: 20
+         },
+         when: {
+            "source": "init-indexes",
+            "once": "exitSuccess"
+         },
+         consul: {
+            deregisterCriticalServiceAfter: "1m"
+         }
+      },
+      {
+         "name": "init-indexes",
+         "exec": "/scripts/init.sh",
+         "when": {
+            "source": "elasticsearch",
+            "once": "healthy"
+         }
+      }
+    ]
+}

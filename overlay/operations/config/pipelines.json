@@ -1,0 +1,389 @@
+{
+    "connections" : {
+      "processors": [
+        {
+          "rename": {
+            "field": "log-json.domain",
+            "target_field": "Domain"
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.shield_mode",
+            "target_field": "Mode"
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.username",
+            "target_field": "Username",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.user_agent_info.parsed_browser",
+            "target_field": "Local Browser",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.url",
+            "target_field": "URL"
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.icapHeaders.X-Shield-Debug.client_ip",
+            "target_field": "Client IP",
+            "ignore_missing": true
+          }
+        },
+        {
+          "remove": {
+            "field": "log-json"
+          }
+        }
+      ]
+    },
+    "fileTransfer": {
+      "processors": [
+        {
+          "set": {
+            "field": "_type",
+            "value": "transfer"
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.userName",
+            "target_field": "userName",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.fileDomain",
+            "target_field": "fileDomain",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.fileName",
+            "target_field": "fileName",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.siteUrl",
+            "target_field": "siteUrl",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.finalStatus",
+            "target_field": "finalStatus",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.errorMessage",
+            "target_field": "errorMessage",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.failed",
+            "target_field": "failed",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.siteDomain",
+            "target_field": "siteDomain",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.fileSize",
+            "target_field": "fileSize",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.filePolicy",
+            "target_field": "filePolicy",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.fileAction",
+            "target_field": "fileAction",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.fileExtension",
+            "target_field": "fileExtension",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.clientIp",
+            "target_field": "clientIp",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.fileUrl",
+            "target_field": "fileUrl",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileTransfer.durationSec",
+            "target_field": "durationSec",
+            "ignore_missing": true
+          }
+        },
+        {
+          "remove": {
+            "field": "log-json"
+          }
+        }
+      ]
+    },
+    "fileSanitization": {
+      "processors": [
+        {
+          "set": {
+            "field": "_type",
+            "value": "sanitization"
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.userName",
+            "target_field": "userName",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.fileName",
+            "target_field": "fileName",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.fileExtension",
+            "target_field": "fileExtension",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.fileSize",
+            "target_field": "fileSize",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.filePolicy",
+            "target_field": "filePolicy",
+            "ignore_missing": true
+          }
+        },       
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.errorMessage",
+            "target_field": "errorMessage",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.durationSec",
+            "target_field": "durationSec",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.siteUrl",
+            "target_field": "siteUrl",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.siteDomain",
+            "target_field": "siteDomain",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.fileUrl",
+            "target_field": "fileUrl",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.fileDomain",
+            "target_field": "fileDomain",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.clientIp",
+            "target_field": "clientIp",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.finalStatus",
+            "target_field": "finalStatus",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileSanitization.cdrStatus",
+            "target_field": "cdrStatus",
+            "ignore_missing": true
+          }
+        },
+        {
+          "remove": {
+            "field": "log-json"
+          }
+        }
+      ]
+    },
+    "fileDownload": {
+      "processors": [
+        {
+          "set": {
+            "field": "_type",
+            "value": "download"
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.userName",
+            "target_field": "userName",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.fileName",
+            "target_field": "fileName",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.fileExtension",
+            "target_field": "fileExtension",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.fileSize",
+            "target_field": "fileSize",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.filePolicy",
+            "target_field": "filePolicy",
+            "ignore_missing": true
+          }
+        },        
+        {
+          "rename": {
+            "field": "log-json.fileDownload.finalStatus",
+            "target_field": "finalStatus",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.errorMessage",
+            "target_field": "errorMessage",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.durationSec",
+            "target_field": "durationSec",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.siteUrl",
+            "target_field": "siteUrl",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.siteDomain",
+            "target_field": "siteDomain",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.fileUrl",
+            "target_field": "fileUrl",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.fileDomain",
+            "target_field": "fileDomain",
+            "ignore_missing": true
+          }
+        },
+        {
+          "rename": {
+            "field": "log-json.fileDownload.clientIp",
+            "target_field": "clientIp",
+            "ignore_missing": true
+          }
+        },
+        {
+          "remove": {
+            "field": "log-json"
+          }
+        }
+      ]
+    }
+}
